@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Android_DB</string>
+    <string name="txvHome">Pagina de Inicio</string>
+    <string name="txvAlta">Registrar Alumno</string>
+    <string name="rdgeneroM">Masculino</string>
+    <string name="rdgeneroF">Femenino</string>
+    <string name="txvGeneroTitulo">Selecciona el genero</string>
+    <string name="edtNombreAlta">Nombre</string>
+    <string name="hintApellidosAlta">Apellidos</string>
+    <string name="btnCambiarFecha">Elige tu fecha de nacimiento</string>
+    <string name="btnAceptarInsert">Aceptar</string>
+</resources>
