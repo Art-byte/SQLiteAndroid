@@ -8,10 +8,9 @@ import android.util.Log
 class StudentsDB {
     private var connectionDB: ConnectionDB
     private lateinit var sqliteDatabase: SQLiteDatabase
-
-
     constructor(context: Context) {
         connectionDB = ConnectionDB(context)
+
     }
 
     companion object {
@@ -20,14 +19,16 @@ class StudentsDB {
         const val LASTNAME = "LastName"
         const val BIRTHDAY = "Birthday"
         const val GENDER = "Gender"
-
+        // lista del list view
         private  val studentsStrings = arrayListOf<String>()
+        // lista de id
         val idStudentsList = arrayListOf<String>()
 
     }
 
     fun studenAdd(student: StudentsEntity): Long{
         sqliteDatabase = connectionDB.openConnection(ConnectionDB.MODE_WRITE)
+
         val values = ContentValues()
         values.put(NAME, student.name)
         values.put(LASTNAME, student.lastName)
@@ -35,11 +36,17 @@ class StudentsDB {
         values.put(BIRTHDAY, student.birthDay)
 
         return sqliteDatabase.insert(ConnectionDB.TABLE_NAME_STUDENTS, null, values)
-
     }
+
+
+
+
+
+
 
     fun studentEdit(student: StudentsEntity): Int {
         sqliteDatabase = connectionDB.openConnection(ConnectionDB.MODE_WRITE)
+
         val values = ContentValues()
         values.put(NAME, student.name)
         values.put(LASTNAME, student.lastName)
@@ -49,17 +56,24 @@ class StudentsDB {
         var args = arrayOf(student.id.toString())
 
         return sqliteDatabase.update(ConnectionDB.TABLE_NAME_STUDENTS, values, selection, args)
-
     }
+
+
 
     fun studentDelete(IdStudent: Int): Int {
         sqliteDatabase = connectionDB.openConnection(ConnectionDB.MODE_WRITE)
+
         var selection = "Id =?"
         var args = arrayOf(IdStudent.toString())
         sqliteDatabase.delete(ConnectionDB.TABLE_NAME_STUDENTS,selection, args)
         return sqliteDatabase.delete(ConnectionDB.TABLE_NAME_STUDENTS, selection, args)
 
     }
+
+
+
+
+
 
     fun studentsGetAll(){
         sqliteDatabase = connectionDB.openConnection(ConnectionDB.MODE_READ)
@@ -84,11 +98,16 @@ class StudentsDB {
 
     }
 
+
+
+
+
     fun readAllUsersString(): Array<String> {
-        studentsStrings.clear()
-        idStudentsList.clear()
+        studentsStrings.clear() // Lista view
+        idStudentsList.clear()// Lista Id
+
         sqliteDatabase= connectionDB.openConnection(ConnectionDB.MODE_READ)
-        val fields = arrayOf(NAME, LASTNAME, GENDER, BIRTHDAY)
+        val fields = arrayOf(ID,NAME, LASTNAME, GENDER, BIRTHDAY)
 
         val cursor = sqliteDatabase.query(
             ConnectionDB.TABLE_NAME_STUDENTS,
@@ -102,17 +121,20 @@ class StudentsDB {
         if(cursor.moveToFirst()){
             do{
                 studentsStrings.add("${cursor.getInt(0)} ${cursor.getString(1)} ${cursor.getString(2)} ${cursor.getInt(3)} ${cursor.getString(4)}")
+                Log.d("UDELP", "${cursor.getInt(0)} ${cursor.getString(1)} ${cursor.getString(2)} ${cursor.getInt(3)} ${cursor.getString(4)}")
 
-                Log.d("UDELP",
-                    "${cursor.getInt(0)} ${cursor.getString(1)} ${cursor.getString(2)} ${cursor.getInt(3)} ${cursor.getString(4)}")
                 idStudentsList.add("${cursor.getInt(0)}")
             }while(cursor.moveToNext())
         }
-        val data = idStudentsList
-        return idStudentsList.toTypedArray()
+        val data = studentsStrings
+        return data.toTypedArray()
 
 
     }
+
+
+
+
 
 
 

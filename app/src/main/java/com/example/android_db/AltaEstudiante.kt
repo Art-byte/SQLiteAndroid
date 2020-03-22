@@ -35,11 +35,11 @@ class AltaEstudiante : AppCompatActivity() {
                         var genero = 0
                         when (selectGenero) {
 
-                            rdFemenino.id -> {
-                                genero = 0
-                            }
                             rdMasculino.id -> {
-                               genero = 1
+                                genero = 1
+                            }
+                            rdFemenino.id -> {
+                               genero = 2
                             }
 
                         }
@@ -53,7 +53,7 @@ class AltaEstudiante : AppCompatActivity() {
                     edtApellidosAlta.text.clear()
                     rdGenero.clearCheck()
                     edtFecha.setText("Fecha nacimiento")
-                    Toast.makeText(this@AltaEstudiante,"Registrado \uD83D\uDE1C\uD83E\uDD13", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@AltaEstudiante,"Alumno Registrado", Toast.LENGTH_LONG).show()
 
                 }else{
                     Toast.makeText(this@AltaEstudiante,"Ingresar Apellido",Toast.LENGTH_LONG).show()
