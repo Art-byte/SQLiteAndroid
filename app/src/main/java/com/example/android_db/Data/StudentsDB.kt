@@ -149,3 +149,26 @@ class StudentsDB {
     }
 }
 
+/*
+* fun studentsGetAllString(): Array<String>{
+        listString.clear()
+        listStringIDS.clear()
+        //Agregando de una vez el listString
+        sqliteDataBase = connectionDb.openConnection(ConnectionDb.MODE_READ)
+        val fields = arrayOf(ID, NAME, LASTNAME, GENDER, BIRTHDAY)
+
+        val cursor = sqliteDataBase.query(ConnectionDb.TABLE_NAME_STUDENTS,fields,null,null,null,null,null)
+
+        if(cursor.moveToFirst()){
+            do {
+                listString.add("${cursor.getInt(0)} ${cursor.getString(1)} ${cursor.getString(2)} ${cursor.getInt(2)} ${cursor.getString(4)}")
+                Log.d("UDELP","${cursor.getInt(0)} ${cursor.getString(1)} ${cursor.getString(2)} ${cursor.getInt(2)} ${cursor.getString(4)}")
+                listStringIDS.add("${cursor.getInt(0)} ")
+            }while (cursor.moveToNext())
+
+        }
+        val elems = listString
+        return elems.toTypedArray()
+
+    }*/
+
