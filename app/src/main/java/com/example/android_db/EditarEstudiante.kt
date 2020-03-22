@@ -63,8 +63,11 @@ class EditarEstudiante : AppCompatActivity() {
 
 
         edtFechaEdit.setText(student.birthDay)
+
         //----------------TEST
         btnEditar.setOnClickListener {
+            val n = StudentsEntity()
+
             if(edtNombreEdit.text.toString().trim().isNotEmpty()){
                 var nomeEdit = edtNombreEdit.text.toString()
 
@@ -73,14 +76,13 @@ class EditarEstudiante : AppCompatActivity() {
 
                     val selectGenero = rdGeneroEdit.checkedRadioButtonId
                     if (selectGenero != -1) {
-                        var genero = 0
-                        when (selectGenero) {
 
+                        when (selectGenero) {
                             rdFemeninoEdit.id -> {
-                                genero = 0
+                                n.gender = 0
                             }
                             rdMasculinoEdit.id -> {
-                                genero = 1
+                                n.gender = 1
                             }
 
                         }
@@ -95,7 +97,7 @@ class EditarEstudiante : AppCompatActivity() {
 
 
 
-                    Toast.makeText(this@EditarEstudiante,"Registrado \uD83D\uDE1C\uD83E\uDD13", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@EditarEstudiante,"Registrado", Toast.LENGTH_LONG).show()
 
                 }else{
                     Toast.makeText(this@EditarEstudiante,"Ingresar Apellido",Toast.LENGTH_LONG).show()

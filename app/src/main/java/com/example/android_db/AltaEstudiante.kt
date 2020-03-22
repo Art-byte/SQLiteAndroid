@@ -22,6 +22,8 @@ class AltaEstudiante : AppCompatActivity() {
 
         btnInsertar.setOnClickListener {
 
+            val n = StudentsEntity()
+
             if(edtNombreAlta.text.toString().trim().isNotEmpty()){
             var nomAlt = edtNombreAlta.text.toString()
 
@@ -32,27 +34,26 @@ class AltaEstudiante : AppCompatActivity() {
 // ------------------------------Corregir esta parte
                     val selectGenero = rdGenero.checkedRadioButtonId
                     if (selectGenero != -1) {
-                        var genero = 0
                         when (selectGenero) {
-
                             rdMasculino.id -> {
-                                genero = 1
+                                n.gender = 1
                             }
                             rdFemenino.id -> {
-                               genero = 2
+                               n.gender = 0
                             }
 
                         }
                     }
 
                     var fecha = edtFecha.text.toString()
-                    var values = StudentsEntity(-1,nomAlt,ApAlta,selectGenero,fecha)
+                    var values = StudentsEntity(-1,nomAlt,ApAlta,n.gender,fecha)
                     var id = studentsDb.studenAdd(values)
 
                     edtNombreAlta.text.clear()
                     edtApellidosAlta.text.clear()
                     rdGenero.clearCheck()
                     edtFecha.setText("Fecha nacimiento")
+
                     Toast.makeText(this@AltaEstudiante,"Alumno Registrado", Toast.LENGTH_LONG).show()
 
                 }else{
