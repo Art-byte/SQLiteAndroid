@@ -9,4 +9,13 @@
     <string name="hintApellidosAlta">Apellidos</string>
     <string name="btnCambiarFecha">Elige tu fecha de nacimiento</string>
     <string name="btnAceptarInsert">Aceptar</string>
+    <string name="txtListaAlumnos">Estudiantes Registrados</string>
+    <string name="txtTitulo">Datos del Alumno</string>
+    <string name="txtNombreAlumno">Nombre del Alumno</string>
+    <string name="txvApellidos">Apellidos</string>
+    <string name="txtGenero">Genero</string>
+    <string name="txtFecha">Fecha de Nacimiento</string>
+    <string name="txtEliminarEstudiante">Eliminar estudiante</string>
+    <string name="txvEditEstudiante">Editar estudiante</string>
+    <string name="txtEditarAlumnos">Editar Alumnos</string>
 </resources>

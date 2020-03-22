@@ -11,14 +11,9 @@ import com.example.android_db.Data.StudentsEntity
 
 class MainActivity : AppCompatActivity() {
 
-    val studentsDb = StudentsDB(this)
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-
-
 
     }
 
@@ -29,18 +24,19 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
+
             R.id.itemAltaEstudiante->{
                 val intent = Intent(this@MainActivity,AltaEstudiante::class.java)
                 startActivity(intent)
             }
 
             R.id.itemListaEstudiante->{
-                val intent = Intent(this@MainActivity,VerEstudiantes::class.java)
+                val intent = Intent(this@MainActivity,VerEstudiantes :: class.java)
                 startActivity(intent)
             }
 
             R.id.itemEditarEstudiante->{
-                val intent = Intent(this@MainActivity,EditarEstudiante::class.java)
+                val intent = Intent(this@MainActivity,Lista_Estudiantes_Edit::class.java)
                 startActivity(intent)
             }
 
@@ -49,6 +45,7 @@ class MainActivity : AppCompatActivity() {
                 startActivity(intent)
             }
         }
+
         return true
     }
 

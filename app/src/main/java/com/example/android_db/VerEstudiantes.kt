@@ -1,10 +1,10 @@
 package com.example.android_db
 
+
 import android.content.Intent
-import android.database.sqlite.SQLiteDatabase
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import com.example.android_db.Data.StudentsDB.Companion.idStudentsList
 import android.view.View
 import android.widget.*
 import com.example.android_db.Data.StudentsDB
@@ -12,37 +12,33 @@ import kotlinx.android.synthetic.main.activity_ver_estudiantes.*
 
 class VerEstudiantes : AppCompatActivity() {
 
-    lateinit var sqliteDatabase: StudentsDB
+    val studentsDB = StudentsDB(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ver_estudiantes)
 
+        if(studentsDB.readAllUsersString().size > 0){
 
-        val adaptador = ArrayAdapter<String>(
-            this@VerEstudiantes,
-            android.R.layout.simple_list_item_1,
-            sqliteDatabase.readAllUsers()
-        )
+            val adapter = ArrayAdapter<String>(this@VerEstudiantes,android.R.layout.simple_list_item_1,studentsDB.readAllUsersString())
+            ltvListasEstudiantes.adapter = adapter
 
-        /**
-         * /lvtEstudiantes.adapter = adaptador
+            ltvListasEstudiantes.setOnItemClickListener{adapterView: AdapterView<*>, view1: View, position: Int, id: Long ->
+                val itemSelected = adapterView.getItemAtPosition(position)
+                val ids = idStudentsList[id.toInt()] // ojo con este
 
-        lvtEstudiantes.setOnItemClickListener{ adapterView: AdapterView<*>, view1: View, position: Int, id: Long ->
-        val itemSeleccionado = adapterView.getItemAtPosition(position)
-        Toast.makeText(
-        this@VerEstudiantes,
-        "$position $id $itemSeleccionado",
-        Toast.LENGTH_SHORT
-        ).show()
+                Toast.makeText(
+                    this@VerEstudiantes,  "Seleccionaste el $ids ", Toast.LENGTH_SHORT).show()
+
+                val intent = Intent(this@VerEstudiantes, Detalle_Estudiante::class.java)
+                intent.putExtra("ID", ids.trim())
+                startActivity(intent)
+                studentsDB.studentsGetAll()
+
+            }
+        }
 
 
-        // paso de parametros
-        val intent = Intent(this@VerEstudiantes, Detalle_Estudiante::class.java)
-        intent.putExtra("ID", position.toString())
-        startActivity(intent)
-
-         */
         }
 
     }

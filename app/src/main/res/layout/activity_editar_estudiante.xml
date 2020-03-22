@@ -6,4 +6,105 @@
     android:layout_height="match_parent"
     tools:context=".EditarEstudiante">
 
+    <TextView
+        android:id="@+id/txvEditarEstudiante"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/txvEditEstudiante"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/edtNombreEdit"
+        android:layout_width="302dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp"
+        android:ems="10"
+        android:hint="@string/edtNombreAlta"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txvEditarEstudiante" />
+
+    <TextView
+        android:id="@+id/edtApellidosedit"
+        android:layout_width="303dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="30dp"
+        android:ems="10"
+        android:hint="@string/hintApellidosAlta"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtNombreEdit" />
+
+    <RadioGroup
+        android:id="@+id/rdGeneroEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtApellidosedit">
+
+        <RadioButton
+            android:id="@+id/rdMasculinoEdit"
+            android:layout_width="111dp"
+            android:layout_height="wrap_content"
+            android:text="@string/rdgeneroM" />
+
+        <RadioButton
+            android:id="@+id/rdFemeninoEdit"
+            android:layout_width="127dp"
+            android:layout_height="34dp"
+            android:text="@string/rdgeneroF" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/txvGeneroEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/txvGeneroTitulo"
+        android:textColor="@android:color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtApellidosedit" />
+
+
+    <Button
+        android:id="@+id/btnEditar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp"
+        android:text="@string/btnAceptarInsert"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtFechaEdit" />
+
+    <EditText
+        android:id="@+id/edtFechaEdit"
+        android:layout_width="305dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="30dp"
+        android:hint="@string/btnCambiarFecha"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rdGeneroEdit" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

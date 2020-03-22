@@ -4,15 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".VerEstudiantes">
+    tools:context=".Lista_Estudiantes_Edit">
 
 
     <TextView
-        android:id="@+id/txvtituloEstudiantes"
+        android:id="@+id/txvTituloEditarAlumnos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="@string/txtListaAlumnos"
+        android:text="@string/txtEditarAlumnos"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,17 +20,15 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
-        android:id="@+id/ltvListasEstudiantes"
+        android:id="@+id/ltvMisAlumnos"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txvtituloEstudiantes"
+        app:layout_constraintTop_toBottomOf="@id/txvTituloEditarAlumnos"
         app:layout_editor_absoluteX="1dp"
         >
 
     </ListView>
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

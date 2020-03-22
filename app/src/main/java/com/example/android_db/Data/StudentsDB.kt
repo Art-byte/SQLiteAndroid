@@ -8,7 +8,7 @@ import android.util.Log
 class StudentsDB {
     private var connectionDB: ConnectionDB
     private lateinit var sqliteDatabase: SQLiteDatabase
-    private val ListaEstu = arrayListOf<String>()
+
 
     constructor(context: Context) {
         connectionDB = ConnectionDB(context)
@@ -20,6 +20,9 @@ class StudentsDB {
         const val LASTNAME = "LastName"
         const val BIRTHDAY = "Birthday"
         const val GENDER = "Gender"
+
+        private  val studentsStrings = arrayListOf<String>()
+        val idStudentsList = arrayListOf<String>()
 
     }
 
@@ -53,7 +56,7 @@ class StudentsDB {
         sqliteDatabase = connectionDB.openConnection(ConnectionDB.MODE_WRITE)
         var selection = "Id =?"
         var args = arrayOf(IdStudent.toString())
-
+        sqliteDatabase.delete(ConnectionDB.TABLE_NAME_STUDENTS,selection, args)
         return sqliteDatabase.delete(ConnectionDB.TABLE_NAME_STUDENTS, selection, args)
 
     }
@@ -81,50 +84,40 @@ class StudentsDB {
 
     }
 
-    fun readAllUsers(): ArrayList<String> {
-        val us = StudentsEntity()
-
-        val db = ConnectionDB.MODE_READ
+    fun readAllUsersString(): Array<String> {
+        studentsStrings.clear()
+        idStudentsList.clear()
+        sqliteDatabase= connectionDB.openConnection(ConnectionDB.MODE_READ)
         val fields = arrayOf(NAME, LASTNAME, GENDER, BIRTHDAY)
 
         val cursor = sqliteDatabase.query(
             ConnectionDB.TABLE_NAME_STUDENTS,
             fields,
-            "SELECT * FROM",
+            null,
             null,
             null,
             null,
             null
         )
+        if(cursor.moveToFirst()){
+            do{
+                studentsStrings.add("${cursor.getInt(0)} ${cursor.getString(1)} ${cursor.getString(2)} ${cursor.getInt(3)} ${cursor.getString(4)}")
 
-        var name: String
-        var lastname: String
-        var gender: Int
-        var birthday: String
-
-        if (cursor.moveToFirst()) {
-            while (cursor.isAfterLast == false) {
-                name = cursor.getString(cursor.getColumnIndex(us.name))
-                lastname = cursor.getString(cursor.getColumnIndex(us.lastName))
-                gender = cursor.getInt(cursor.getColumnIndex(us.gender.toString()))
-                birthday = cursor.getString(cursor.getColumnIndex(us.birthDay))
-
-                ListaEstu.add(cursor.getInt(0).toString())
-                ListaEstu.add(cursor.getString(1))
-                ListaEstu.add(cursor.getString(2))
-                ListaEstu.add(cursor.getInt(3).toString())
-                ListaEstu.add(cursor.getString(4))
-
-                cursor.moveToNext()
-            }
+                Log.d("UDELP",
+                    "${cursor.getInt(0)} ${cursor.getString(1)} ${cursor.getString(2)} ${cursor.getInt(3)} ${cursor.getString(4)}")
+                idStudentsList.add("${cursor.getInt(0)}")
+            }while(cursor.moveToNext())
         }
-        return ListaEstu
+        val data = idStudentsList
+        return idStudentsList.toTypedArray()
+
+
     }
 
 
 
 
-    fun studentsGetOne(IdStudent: Int){
+    fun studentsGetOne(IdStudent: Int): StudentsEntity{
         sqliteDatabase = connectionDB.openConnection(ConnectionDB.MODE_READ)
         val fields = arrayOf(ID, NAME, LASTNAME, GENDER, BIRTHDAY)
         var selection = "Id=?"
@@ -138,18 +131,28 @@ class StudentsDB {
             null,
             null
         )
+        var showStudent = StudentsEntity()
         if (cursor.moveToFirst()) {
+            var id= cursor.getInt(0)
+            var name = cursor.getString(1)
+            var lastName = cursor.getString(2)
+            var gender = cursor.getInt(3)
+            var birthday = cursor.getString(4)
 
+            showStudent = StudentsEntity(cursor.getInt(0), "${name}","${lastName}",cursor.getInt(3),birthday)
             Log.d(
                 "UDELP",
                 "${cursor.getInt(0)} ${cursor.getString(1)} ${cursor.getString(2)} ${cursor.getInt(3)} ${cursor.getString(4)}"
             )
         }
+        return showStudent
 
     }
 }
 
 /*
+Prueba cadenas
+
 * fun studentsGetAllString(): Array<String>{
         listString.clear()
         listStringIDS.clear()

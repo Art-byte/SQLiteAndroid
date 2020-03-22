@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Detalle_Estudiante"></activity>
+        <activity android:name=".estudiantesss"></activity>
+        <activity android:name=".Lista_Estudiantes_Edit" />
+        <activity android:name=".Detalle_Estudiante" />
         <activity android:name=".VerEstudiantes" />
         <activity android:name=".EliminarEstudiante" />
         <activity android:name=".Data.EliminarEstudiante" />

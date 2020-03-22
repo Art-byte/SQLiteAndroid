@@ -5,6 +5,7 @@ import android.app.Dialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import com.example.android_db.Data.StudentsDB
 import com.example.android_db.Data.StudentsEntity
 import kotlinx.android.synthetic.main.activity_alta_estudiante.*
@@ -12,8 +13,7 @@ import java.util.*
 
 class AltaEstudiante : AppCompatActivity() {
 
-    val studentsDb = StudentsDB()
-
+    val studentsDb = StudentsDB(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,84 +21,79 @@ class AltaEstudiante : AppCompatActivity() {
 
 
         btnInsertar.setOnClickListener {
-            val newstudents = StudentsEntity(-1, name = "", lastName = "",gender =0 )
 
-            newstudents.name = edtNombreAlta.text.toString()
-            newstudents.lastName = edtApellidosAlta.text.toString()
+            if(edtNombreAlta.text.toString().trim().isNotEmpty()){
+            var nomAlt = edtNombreAlta.text.toString()
 
-            val selectGenero = rdGenero.checkedRadioButtonId
-            if (selectGenero != -1) {
-                when (selectGenero) {
-                    rdMasculino.id -> {
-                        newstudents.gender = 1
+                if(edtApellidosAlta.text.toString().trim().isNotEmpty()){
+                    var ApAlta = edtApellidosAlta.text.toString()
+
+
+// ------------------------------Corregir esta parte
+                    val selectGenero = rdGenero.checkedRadioButtonId
+                    if (selectGenero != -1) {
+                        var genero = 0
+                        when (selectGenero) {
+
+                            rdFemenino.id -> {
+                                genero = 0
+                            }
+                            rdMasculino.id -> {
+                               genero = 1
+                            }
+
+                        }
                     }
-                    rdFemenino.id -> {
-                        newstudents.gender = 0
-                    }
+
+                    var fecha = edtFecha.text.toString()
+                    var values = StudentsEntity(-1,nomAlt,ApAlta,selectGenero,fecha)
+                    var id = studentsDb.studenAdd(values)
+
+                    edtNombreAlta.text.clear()
+                    edtApellidosAlta.text.clear()
+                    rdGenero.clearCheck()
+                    edtFecha.setText("Fecha nacimiento")
+                    Toast.makeText(this@AltaEstudiante,"Registrado \uD83D\uDE1C\uD83E\uDD13", Toast.LENGTH_LONG).show()
+
+                }else{
+                    Toast.makeText(this@AltaEstudiante,"Ingresar Apellido",Toast.LENGTH_LONG).show()
                 }
+        }else{
+                Toast.makeText(this@AltaEstudiante,"Ingresar Nombre",Toast.LENGTH_LONG).show()
             }
-
-            Log.d("UDELP", studentsDb.studenAdd(newstudents).toString())
-            studentsDb.studentsGetAll()
-
-
 
         }
 
+
+
+        // Control de fechas
         val c = Calendar.getInstance()
         val year = c.get(Calendar.YEAR)
         val month = c.get(Calendar.MONTH)
         val day = c.get(Calendar.DAY_OF_MONTH)
 
         edtFecha.setOnClickListener {
-            val newstudents = StudentsEntity()
-
             val dpd = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
                 // Display Selected date in TextView
                 val mes= (monthOfYear + 1)
-                edtFecha.setText("" + dayOfMonth + "-" + mes.toString() + "-" + year).toString()
+                var cadena =""
+                if(mes in 1..9){
+                    cadena =("0")+mes.toString()
+                }else{
+                    cadena = mes.toString()
+                }
+                edtFecha.setText("" + year + "-" + cadena.toString() + "-" + dayOfMonth)
             }, year, month, day)
             dpd.show()
 
-            var nacimiento = edtFecha.text.toString()
-            newstudents.birthDay= nacimiento
-            Log.d("UDELP", studentsDb.studenAdd(newstudents).toString())
-            studentsDb.studentsGetAll()
         }
+        studentsDb.studentsGetAll()
+
+    } // fin del oncreate
+
+    } // final de la clase
 
 
-
-
-    }
-
-    }
-
-
-/*•
-
-   var values = StudentsEntity(-1,nombreAlta,ApAlta,AmAlta,generoposition,selectedNivelAcademico,escuelaposition,phone,correo,nacimiento)
-                                                var id = studentsDb.studentAdd(values)
-                                                Log.d("UDELP","El elemento guardado es $id")
-
-
-
-var values = StudentsEntity(-1,"Andres","Chavarria","Chavez",1,2,2,"5513107596","andrew_f19@hotmail.com","1994/08/31")
-        var id = studentsDb.studentAdd(values)
-fun  studentAdd(student:StudentsEntity): Long{
-        sqliteDataBase = connectionDb.openConnection(ConnectionDb.MODE_WRITE)
-
-        val values = ContentValues()
-        values.put(NAME,student.name)
-        values.put(LASTNAME,student.lastName)
-        values.put(GENDER,student.gender)
-        values.put(ACADEMICLEVEL,student.academicLevel)
-        values.put(PREVIOUSSCHOOL,student.previousSchool)
-        values.put(PHONE,student.phone)
-        values.put(EMAIL,student.email)
-        values.put(BIRTHDAY,student.birthday)
-
-        return sqliteDataBase.insert(ConnectionDb.TABLE_NAME_STUDENTS,null,values)
-        ]*/
 
 
 
